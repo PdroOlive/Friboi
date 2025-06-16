@@ -17,6 +17,8 @@ export default function SingUpScreen() {
     const [error, setError] = useState<string | null>("");
     const [ emailAddress, setEmailAddress ] = useState<string>("")
     const [ password, setPassword ] = useState<string>("")
+    const [ firstName, setFirstName ] = useState<string>("")
+    const [ lastName, setLastName ] = useState<string>("")
     const [ pendingVerification, setPendingVerification ] = useState<boolean>(false)
     const [ code, setCode ] = useState<string>("")
 
@@ -24,20 +26,21 @@ export default function SingUpScreen() {
     async function handleOnSignUpPress() {
         if(!isLoaded) return setError("Usuário não existe, crie sua conta");
 
-        if(!emailAddress || !password) {
-            setErrorEmailSignUp("Preecha todos os campos, por gentileza!");
-            setErrorPasswordSignUp("Preecha todos os campos, por gentileza!")
+        if(!emailAddress || !password || !firstName || !lastName) {
+            setError("Preecha todos os campos, por gentileza!");
             return;
         }
         if(password.length < 8) {
             setErrorPasswordSignUp("Senha Inválida")
             return;
         }
-        setErrorEmailSignUp(null)
         setErrorPasswordSignUp(null)
+        setError(null)
 
         try {
             await signUp.create({
+                firstName,
+                lastName,
                 emailAddress,
                 password
             })
@@ -103,6 +106,33 @@ export default function SingUpScreen() {
             </Text>
 
             <TextInput 
+            value={firstName}
+            label="Nome"
+            autoCapitalize="none"
+            keyboardType="email-address"
+            placeholder=""
+            mode="outlined"
+            activeOutlineColor="#3b0000"
+            onChangeText={(name) =>{
+                setFirstName(name)
+                setError(null)
+            }}
+            />
+
+            <TextInput 
+            value={lastName}
+            label="Sobrenome"
+            autoCapitalize="none"
+            keyboardType="default"
+            mode="outlined"
+            activeOutlineColor="#3b0000"
+            onChangeText={(lastNameProp) =>{
+                    setLastName(lastNameProp)
+                    setError(null)
+                }}
+            />
+
+            <TextInput 
             value={emailAddress}
             label="Email"
             autoCapitalize="none"
@@ -136,6 +166,10 @@ export default function SingUpScreen() {
             {errorPasswordSignUp && (
                 <Text style={{ color: theme.colors.error }}><AntDesign name="exclamationcircleo" /> {errorPasswordSignUp}</Text> 
             )}
+
+            { error && (
+                 <Text style={{ color: theme.colors.error }}><AntDesign name="exclamationcircleo" /> {error}</Text> 
+            ) }
 
             <Button mode="contained" buttonColor="#3b0000" onPress={handleOnSignUpPress}>
                 <Text variant="titleMedium" style={styles.btnText}>Próximo</Text> 
@@ -175,3 +209,5 @@ const styles = StyleSheet.create({
 
     }
 })
+
+// Sales Services and Support
