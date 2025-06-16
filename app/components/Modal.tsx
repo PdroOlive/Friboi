@@ -1,26 +1,27 @@
 import { ClientProps, clients } from "@/data/dataClient";
 import { AntDesign } from "@expo/vector-icons";
-import { useEffect, useState } from "react";
-import { Modal, ScrollView, TouchableOpacity, View, StyleSheet, Pressable, StatusBar, Platform } from "react-native";
-import MapView, { Marker, PROVIDER_GOOGLE, Region } from "react-native-maps";
+import { useState } from "react";
+import { Modal, TouchableOpacity, View, StyleSheet, Pressable } from "react-native";
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import { Text } from "react-native-paper"
+import { ClientInfos } from "./ClientInfos";
 
 
-export function ModalComp({ name, currentLocation }: ClientProps) {
+export function ModalComp({ name, currentLocation, infos }: ClientProps) {
     
     const [ visible, setVisible ] = useState<boolean>(false)
 
     return(
         <View>
             
-            <View style={[styles.containerChild]}>
+                <TouchableOpacity onPress={() => setVisible(true)}>
+                    <View style={[styles.containerChild]}>
                         <Text style={styles.title} variant="titleLarge">
                             {name}
                         </Text>
-                <TouchableOpacity onPress={() => setVisible(true)}>
-                    <AntDesign name="right" size={24}/>
+                        <AntDesign name="right" size={24} color="#fff" />
+                    </View>
                 </TouchableOpacity>
-            </View>
 
 
             <Modal
@@ -38,14 +39,7 @@ export function ModalComp({ name, currentLocation }: ClientProps) {
                             <AntDesign name="closecircle" size={24}/>
                         </Pressable>
                     </View>
-                    {/* { isLoadingLocation && <ActivityIndicator size={"large"} color="#000"/> } */}
-                    {/* {!hasLocationPermission && (
-                    <Button
-                    title="Conceder Permissão de Localização"
-                    onPress={requestLocationPermission}
-                    />
-                    )} */}
-                    
+
                     <MapView 
                     style={styles.map} 
                     provider={PROVIDER_GOOGLE} 
@@ -53,16 +47,18 @@ export function ModalComp({ name, currentLocation }: ClientProps) {
                     scrollEnabled={false}
                     pitchEnabled={false}
                     rotateEnabled={false}
-
                     >
-                    <Marker 
-                    coordinate={{
-                    latitude: currentLocation!.latitude,
-                    longitude: currentLocation!.longitude
-                    }}
+                        <Marker 
+                        coordinate={{
+                        latitude: currentLocation!.latitude,
+                        longitude: currentLocation!.longitude
+                        }}
 
-                    />
+                        />
                     </MapView>
+                    <View>
+                        <ClientInfos balance={infos.balance} operation={infos.operation} request={infos.request}/>
+                    </View>
 
 
                 </View>
@@ -79,12 +75,14 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: "space-between",
         alignItems: "center",
-        backgroundColor: "#fff",
+        backgroundColor: "#3b0000",
         padding: 10,
+        borderTopEndRadius: 20,
+        borderBottomStartRadius: 20
 
     }, 
     title: {
-        color: "#000",
+        color: "#fff",
         fontWeight: "bold"
     },
     containerModal: {

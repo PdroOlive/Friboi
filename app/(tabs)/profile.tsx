@@ -33,13 +33,11 @@ export default function ProfileScreen() {
 
 
         if(!result.canceled) {
-            setSelectedImage()
+            setSelectedImage(result.assets[0].uri)
             
         }
     }
 
-    const onSetImage = (imageData: any) => user?.setProfileImage({ file: imageData }).then(() => user?.reload())
-        
  
   return (
     
@@ -49,12 +47,12 @@ export default function ProfileScreen() {
         {/* <AntDesign name="user" size={80} /> */}
         <Image 
           alt={user?.primaryEmailAddress?.emailAddress}
-          src={user?.imageUrl}
+          source={{uri: selectedImage}}
           width={200}
           height={200}
           style={styles.image}
         />
-        <TouchableOpacity onPress={() => onSetImage()}><AntDesign name="edit" size={25}/></TouchableOpacity>
+        <TouchableOpacity onPress={pickImage}><AntDesign name="edit" size={25}/></TouchableOpacity>
         <Text style={styles.textName} variant="displaySmall">{user?.fullName}</Text>
         <SignOutButton />
 

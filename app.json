@@ -48,12 +48,7 @@
           "resizeMode": "contain",
           "backgroundColor": "#ffffff"
         }
-      ],
-      "expo-image-picker",
-        {
-          "photosPermission": "O aplicativo precisa de acesso à sua galeria para que você possa escolher uma foto para o seu perfil.",
-          "cameraPermission": "O aplicativo precisa de acesso à sua câmera para que você possa tirar uma foto para o seu perfil."
-        }
+      ]
     ],
     "experiments": {
       "typedRoutes": true
