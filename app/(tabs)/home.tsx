@@ -3,7 +3,7 @@ import { ScrollView, StyleSheet, View } from "react-native";
 import { clients } from "@/data/dataClient";
 import { useUser } from "@clerk/clerk-expo";
 import { Header } from "../components/Header";
-import { ModalComp } from "../components/Modal";
+import { ModalComp } from "../components/Modals/Modal";
 
 
 export default function HomeScreen() {
@@ -12,7 +12,7 @@ export default function HomeScreen() {
 
   return (
     <View style={styles.container}>
-        <Header />
+        <Header title="SESEV - Serviços e Suporte em Vendas"/>
 
         <ScrollView>
             <View style={styles.containerCard}>

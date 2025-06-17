@@ -1,10 +1,15 @@
 import { Platform, StatusBar, StyleSheet, View } from "react-native";
 import { Text } from "react-native-paper";
 
-export function Header() {
+interface HeaderProps {
+    title: string;
+}
+
+
+export function Header({ title }: HeaderProps) {
     return(
         <View style={styles.container}>
-            <Text variant="titleLarge" style={styles.title}>SESEV - Serviços e Suporte em Vendas</Text>
+            <Text variant="titleLarge" style={styles.title}>{title}</Text>
         </View>
     )
 }
@@ -19,6 +24,6 @@ const styles = StyleSheet.create({
     },
     title: {
         color: "#fff",
-        fontWeight: "bold"
+        fontWeight: "bold",
     }
 })
