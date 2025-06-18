@@ -15,7 +15,7 @@ export default function PaymentScreen() {
             <ScrollView>
                 <View style={styles.containerCard}>
                     {clients.map((props) => (
-                        props.salesperson === user?.fullName && !props.infos.request &&(<ModalPayment key={props.name} name={props.name} />)
+                        props.salesperson === user?.fullName && !props.infos.request &&(<ModalPayment infos={props.infos} key={props.name} name={props.name} />)
                     
                     ))}
                 </View>

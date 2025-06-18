@@ -26,7 +26,7 @@ export function ModalComp({ name, currentLocation, infos }: ClientProps) {
 
 
              <SafeAreaProvider>
-                <SafeAreaView style={styles.containerSafe}>
+                <SafeAreaView >
 
 
                     <Modal
@@ -36,37 +36,35 @@ export function ModalComp({ name, currentLocation, infos }: ClientProps) {
                     onRequestClose={() => setVisible(false)}
                     >
 
-                        <View style={styles.containerModal}>
-                            <View style={styles.childViewModal}>
-                                <Text style={styles.titleModal} variant="titleLarge">
-                                    {name}
-                                </Text>
-                                <Pressable onPress={() => setVisible(false)}>
-                                    <AntDesign name="close" size={24}/>
-                                </Pressable>
+                        <View style={styles.containerSafe}>
+                            <View style={styles.containerModal}>
+                                <View style={styles.childViewModal}>
+                                    <Text style={styles.titleModal} variant="titleLarge">
+                                        {name}
+                                    </Text>
+                                    <Pressable onPress={() => setVisible(false)}>
+                                        <AntDesign name="close" size={24}/>
+                                    </Pressable>
+                                </View>
+                                <MapView
+                                style={styles.map}
+                                provider={PROVIDER_GOOGLE}
+                                initialRegion={currentLocation}
+                                scrollEnabled={false}
+                                pitchEnabled={false}
+                                rotateEnabled={false}
+                                >
+                                    <Marker
+                                    coordinate={{
+                                    latitude: currentLocation!.latitude,
+                                    longitude: currentLocation!.longitude
+                                    }}
+                                    />
+                                </MapView>
+                                <View>
+                                    <ClientInfos balance={infos.balance} operation={infos.operation} request={infos.request}/>
+                                </View>
                             </View>
-
-                            <MapView 
-                            style={styles.map} 
-                            provider={PROVIDER_GOOGLE} 
-                            initialRegion={currentLocation} 
-                            scrollEnabled={false}
-                            pitchEnabled={false}
-                            rotateEnabled={false}
-                            >
-                                <Marker 
-                                coordinate={{
-                                latitude: currentLocation!.latitude,
-                                longitude: currentLocation!.longitude
-                                }}
-
-                                />
-                            </MapView>
-                            <View>
-                                <ClientInfos balance={infos.balance} operation={infos.operation} request={infos.request}/>
-                            </View>
-
-
                         </View>
 
 
@@ -96,19 +94,20 @@ const styles = StyleSheet.create({
     },
     containerSafe:{
         flex: 1,
-        justifyContent:"center",
-        alignItems: "center",
-        backgroundColor: "#000000b7"
+        backgroundColor: "#000000b7",
+        justifyContent: "center",
+        padding: 15
+        
     },
     containerModal: {
         backgroundColor: "#fff",
-        padding: 1
+        padding: 20
         
     },
     childViewModal: {
         flexDirection: "row",
         justifyContent: "space-between",
-        padding: 15
+        paddingBottom: 15
     },
 
     titleModal: {

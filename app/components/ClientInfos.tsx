@@ -36,7 +36,7 @@ export function ClientInfos({ balance, operation, request }: ClientInfosProps) {
 
             ) : (
                 <Pressable style={[styles.button, styles.buttonDisable]} disabled>
-                    <Text style={{ color: "#fff" }} variant="titleMedium">Informar Pagamamento</Text>
+                    <Text style={{ color: "#696969" }} variant="titleMedium">Informar Pagamamento</Text>
                 </Pressable>
             )}
         </View>
@@ -62,7 +62,7 @@ const styles = StyleSheet.create({
         alignItems: "center",
         marginTop: 30,
         backgroundColor: "#3b0000",
-        padding: 20,
+        padding: 10,
         width: "80%",
         borderTopEndRadius: 20,
         borderBottomStartRadius: 20
